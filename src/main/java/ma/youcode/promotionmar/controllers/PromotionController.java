@@ -1,5 +1,8 @@
 package ma.youcode.promotionmar.controllers;
 
+import lombok.extern.log4j.Log4j2;
+import ma.youcode.promotionmar.Observer.PromotionListener;
+import ma.youcode.promotionmar.Observer.PromotionManager;
 import ma.youcode.promotionmar.dto.PromotionGetDto;
 import ma.youcode.promotionmar.dto.PromotionPostDto;
 import ma.youcode.promotionmar.entities.Promotion;
@@ -14,9 +17,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/promotion")
-public class PromotionController {
+@Log4j2
+public class PromotionController implements PromotionListener {
     @Autowired
     private PromotionService promotionService;
+    @Autowired
+    private PromotionManager promotionManager;
 
 
     @PostMapping
@@ -34,4 +40,12 @@ public class PromotionController {
         return promotionService.findAllPromotions();
     }
 
+
+    @Override
+    public void notifyPromotion() {
+        log.info("notification de promotion envoye");
+        promotionManager.notifyPromotion();
+        System.out.println("Observer notified!");
+//        this.findAllUsers();
+    }
 }

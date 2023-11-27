@@ -8,7 +8,7 @@ import ma.youcode.promotionmar.enums.PromotionType;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PromotionPostDto {
+public class PromotionPostDto extends PromotionGetDto{
     private Long id;
     private String createdDate;
     private String startDate;
